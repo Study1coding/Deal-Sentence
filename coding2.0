@@ -1,0 +1,102 @@
+using System;
+namespace DealSentence
+{
+    class DealSentence
+    {
+        private string stc;
+        public string m_sentences=null;
+        public DealSentence()
+        {
+
+        }
+        public DealSentence(string a)
+        {
+            stc = a;
+        }
+        public void Display()
+        {
+            Console.WriteLine(stc);
+        }
+        public void FenHang()//交错数组Split（）方法
+        {
+            string[] b = stc.Split();
+            foreach (string c in b)
+            {
+                Console.WriteLine(c);
+            }
+        }
+        public void ReverseFun()
+        {
+            string strReturn = "";
+            foreach (char c in stc)
+
+            {
+                strReturn = c + strReturn;
+            }
+            stc = strReturn;
+
+        }
+        public void UpperFun()
+        {
+            stc = stc.ToUpper();
+           //Console.WriteLine(stc.ToUpper());
+        }
+        public void DisplayUsage()
+        {
+            Console.WriteLine(
+                "\ta)	无选项则直接输出：Hello world!\n" +
+                "\tb)  含 - w不含 - r选项， 输出： Hello World\n" +
+                "\tc)	含 - r 不含 - w选项，输出：!dlrow olleH\n" +
+                "\td)	同时有 - w - r ,输出： dlrow\n" +
+                "\t \tolleH\n" +
+                "\te)	只要含 - u ，则大写所有字符，再按上面4条规则输出。\n");
+        }
+        public void SetStr(string str)
+        {
+            stc = str;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            DealSentence deal = new DealSentence();
+            deal.DisplayUsage();
+            int w = 0;
+            int r = 0;
+            int u = 0;
+            foreach (string option in args)
+            {
+               switch (option)
+                {
+                    case "-w":
+                        w++;
+                        //Console.WriteLine("-w succeed!");
+                        /* deal.FenHang();*/
+                        break;
+                    case "-r":
+                        r++; break;
+                    case "-u":
+                        u++;
+                        break;
+                    default:
+                        deal.m_sentences = deal.m_sentences + option + ' ';//引入一个public字段
+                        break;
+               }
+            }
+            deal.SetStr(deal.m_sentences); //传入到str
+            if (u != 0)
+            { deal.UpperFun(); }
+            
+            if (r != 0)
+            { deal.ReverseFun(); }
+            if (w != 0)
+            {
+                deal.FenHang();
+            }
+            else { deal.Display(); }
+            Console.WriteLine("\t\tfinish!!!");
+        }
+    }
+}
+
